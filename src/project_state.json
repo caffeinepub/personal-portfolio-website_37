@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 11,
+  "summary": "Build a personal portfolio app/site.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-create-a-responsive-personal-portfolio-single-page-site-with-the-following-sections-1-top-navigation-with-in-page-anchors-2-hero-intro-section-with-name-role-short-bio-and-primary-ctas-e-g-view-projects-contact-3-about-section-4-skills-tech-stack-section-5-projects-section-with-project-cards-title-short-description-tech-tags-links-6-experience-education-section-7-contact-section-with-a-contact-form-ui-and-or-a-mailto-link-and-8-footer-with-social-links",
+      "title": "Create a responsive personal portfolio single-page site with the following sections: (1) Top navigation with in-page anchors, (2) Hero/intro section with name, role, short bio, and primary CTAs (e.g., “View Projects”, “Contact”), (3) About section, (4) Skills/tech stack section, (5) Projects section with project cards (title, short description, tech tags, links), (6) Experience/Education section, (7) Contact section with a contact form UI and/or a mailto link, and (8) Footer with social links.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-simple-content-model-on-the-frontend-so-portfolio-content-name-bio-skills-projects-experience-social-links-can-be-updated-in-one-place-e-g-a-single-typescript-data-file-without-editing-multiple-components",
+      "title": "Implement a simple content model on the frontend so portfolio content (name, bio, skills, projects, experience, social links) can be updated in one place (e.g., a single TypeScript data file) without editing multiple components.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-one-coherent-visual-theme-for-the-portfolio-color-palette-typography-spacing-component-style-and-apply-it-consistently-across-sections-using-tailwind-css-choose-a-distinct-style-appropriate-for-a-professional-portfolio-and-avoid-default-looking-layouts",
+      "title": "Add one coherent visual theme for the portfolio (color palette, typography, spacing, component style) and apply it consistently across sections using Tailwind CSS. Choose a distinct style appropriate for a professional portfolio and avoid default-looking layouts.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-basic-seo-and-sharing-metadata-set-a-site-title-description-and-open-graph-twitter-meta-tags-include-a-favicon-ensure-accessible-landmarks-and-semantics-header-nav-main-footer-and-reasonable-contrast-for-text",
+      "title": "Add basic SEO and sharing metadata: set a site title, description, and Open Graph/Twitter meta tags; include a favicon; ensure accessible landmarks and semantics (header/nav/main/footer), and reasonable contrast for text.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-image-assets-to-support-the-portfolio-visuals-and-render-them-as-static-assets-from-frontend-public-assets-generated-no-backend-routing",
+      "title": "Add generated image assets to support the portfolio visuals and render them as static assets from frontend/public/assets/generated (no backend routing).",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-user-facing-request-changes-entry-point-that-helps-the-user-specify-what-they-want-to-change-in-the-portfolio-since-the-request-was-ambiguous-the-entry-point-must-be-accessible-from-the-main-ui-e-g-topnav-and-or-footer-and-open-a-dialog-with-a-short-form",
+      "title": "Add a user-facing \"Request Changes\" entry point that helps the user specify what they want to change in the portfolio (since the request was ambiguous). The entry point must be accessible from the main UI (e.g., TopNav and/or Footer) and open a dialog with a short form.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-request-changes-flow-reuses-the-existing-portfolio-content-model-values-e-g-contact-email-and-does-not-require-any-backend-changes",
+      "title": "Ensure the \"Request Changes\" flow reuses the existing portfolio content model values (e.g., contact email) and does not require any backend changes.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-the-portfolio-load-in-dark-mode-by-default-apply-the-existing-tailwind-dark-theme-tokens-site-wide-while-preserving-the-ability-for-components-to-use-theme-tokens-bg-background-text-foreground-etc",
+      "title": "Make the portfolio load in dark mode by default (apply the existing Tailwind dark theme tokens site-wide) while preserving the ability for components to use theme tokens (bg-background, text-foreground, etc.).",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-typography-to-an-elegant-professional-engineering-oriented-font-pairing-and-apply-it-consistently-across-the-site-headings-display-vs-body-text-including-navigation-and-buttons",
+      "title": "Update typography to an elegant, professional engineering-oriented font pairing and apply it consistently across the site (headings/display vs body text), including navigation and buttons.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-new-user-facing-flow-that-lets-the-user-fill-in-their-personal-details-for-all-portfolio-sections-hero-about-skills-projects-experience-contact-footer-using-the-existing-portfoliocontent-schema-without-requiring-code-edits",
+      "title": "Add a new user-facing flow that lets the user fill in their personal details for all portfolio sections (hero, about, skills, projects, experience, contact, footer) using the existing `PortfolioContent` schema, without requiring code edits.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-local-preview-of-the-filled-details-by-storing-the-completed-portfoliocontent-in-browser-localstorage-and-rendering-the-portfolio-using-the-stored-override-when-present",
+      "title": "Implement local preview of the filled details by storing the completed `PortfolioContent` in browser localStorage and rendering the portfolio using the stored override when present.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-provide-a-clear-way-to-revert-to-the-default-sample-content-by-clearing-the-localstorage-override-from-the-ui",
+      "title": "Provide a clear way to revert to the default sample content by clearing the localStorage override from the UI.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-resume-import-entry-inside-the-existing-fill-my-details-dialog-that-lets-the-user-paste-resume-text-and-apply-an-auto-filled-draft-into-the-current-portfoliocontent-form-data",
+      "title": "Add a resume import entry inside the existing \"Fill My Details\" dialog that lets the user paste resume text and apply an auto-filled draft into the current `PortfolioContent` form data.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-deterministic-client-side-resume-to-portfoliocontent-parser-mapping-no-external-services-that-extracts-common-resume-fields-name-headline-role-summary-skills-experience-education-projects-links-email-and-maps-them-into-the-existing-schema-in-frontend-src-content-portfoliocontent-ts",
+      "title": "Implement a deterministic, client-side resume-to-`PortfolioContent` parser/mapping (no external services) that extracts common resume fields (name, headline/role, summary, skills, experience, education, projects, links, email) and maps them into the existing schema in `frontend/src/content/portfolioContent.ts`.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-safe-preview-confirmation-step-for-resume-import-that-shows-what-will-change-before-applying-the-imported-values-to-the-editable-form-state",
+      "title": "Add a safe preview/confirmation step for resume import that shows what will change before applying the imported values to the editable form state.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a personal portfolio app/site",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Update portfolio visual design to a dark theme with an elegant, professional engineering-oriented font pairing",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Fill in the user's personal details/content across the portfolio sections (name, bio, skills, projects, experience, contact/socials) using the existing content model",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "projectName": "Personal portfolio website",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

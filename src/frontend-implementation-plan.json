@@ -1,0 +1,75 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Resume-based auto-fill draft import for portfolio content",
+  "requirements": [
+    {
+      "id": "REQ-13",
+      "summary": "Add a resume import section inside the existing Fill My Details dialog that generates an auto-filled draft and applies it to the current PortfolioContent form state only on explicit user action.",
+      "acceptanceCriteria": [
+        "In the Fill My Details dialog, there is a clear UI section (e.g., a new tab or a panel) labeled in English for importing from a resume.",
+        "The user can paste resume text into a multiline text area and click an action (e.g., \"Generate Draft\") to produce auto-filled values for the portfolio form.",
+        "The user can review the generated draft and explicitly apply it to the editable form state (no silent overwrite).",
+        "If the resume text is empty, the UI shows an inline validation message and does not attempt to generate a draft.",
+        "All changes remain client-side and use the existing localStorage override mechanism when the user clicks Save."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/portfolio/FillMyDetailsDialog.tsx",
+          "operation": "modify",
+          "description": "Add a new, clearly labeled English UI section (e.g., a new TabsTrigger/TabsContent like \"Resume Import\") within the existing Fill My Details dialog. Use existing shadcn-ui components already used in this dialog (Tabs, Textarea, Button, Card, ScrollArea, etc.) to: (1) capture pasted resume text in a multiline Textarea, (2) validate non-empty input with inline error messaging, (3) trigger client-side draft generation, and (4) store the generated draft separately from formData until the user explicitly applies it. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/lib/resume/applyPortfolioPatch.ts",
+          "operation": "create",
+          "description": "Create a small utility that applies a parsed resume \"patch\" to an existing PortfolioContent object, ensuring only confidently extracted, non-empty values overwrite current form values and that unknown/unconfident fields do not blank out existing data (including safe handling for arrays like paragraphs, skills, experience items, projects, and social links)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-14",
+      "summary": "Implement a deterministic, browser-only resume text parser that maps common resume fields into the existing PortfolioContent schema without breaking changes.",
+      "acceptanceCriteria": [
+        "Parsing and mapping runs entirely in the browser (no backend calls; no third-party/LLM integrations).",
+        "The mapping populates: `hero.name`, `hero.role`, `hero.bio`, `about.paragraphs` (or a reasonable subset), `skills.categories[*].skills`, `experience.items[*]` (work/education), `projects.projects[*]` (when identifiable), `contact.email` (when identifiable), and `footer.socialLinks` (when identifiable).",
+        "If a field cannot be confidently extracted, the existing value in the form remains unchanged (do not blank out user data).",
+        "The parser tolerates typical resume formatting (headings like SUMMARY, SKILLS, EXPERIENCE, EDUCATION, PROJECTS; bullet lists; varying whitespace) without crashing.",
+        "User-facing labels and helper text for this feature are in English."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/lib/resume/parseResumeToPortfolioPatch.ts",
+          "operation": "create",
+          "description": "Implement a deterministic, client-side-only resume text parser/mapping that produces a Partial/patch shaped like the existing PortfolioContent schema (as defined in frontend/src/content/portfolioContent.ts) without modifying the schema. The parser should tolerate common headings (SUMMARY/SKILLS/EXPERIENCE/EDUCATION/PROJECTS/LINKS/CONTACT), bullet lists, and inconsistent whitespace; extract best-effort values for name, role/headline, summary, skills, experience (work + education), projects, email, and common links (e.g., GitHub/LinkedIn/portfolio). Ensure the parser never throws on malformed input and returns only fields it can extract with reasonable confidence."
+        },
+        {
+          "path": "frontend/src/components/portfolio/FillMyDetailsDialog.tsx",
+          "operation": "modify",
+          "description": "Wire the new resume import UI action (e.g., \"Generate Draft\") to call the deterministic parser and produce a draft patch. Ensure no network calls are made and that generated values are merged via a safe merge strategy (only overwrite when extracted values are non-empty) rather than replacing the full form state."
+        }
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "summary": "Add a preview/confirmation step that summarizes the generated resume draft and lets the user apply or discard it without altering existing form state until confirmed.",
+      "acceptanceCriteria": [
+        "After generating a draft from resume text, the UI presents a compact preview (e.g., key fields and counts) of the extracted data before applying it.",
+        "The user can choose to apply the draft or discard it and keep the current form values.",
+        "Discarding the draft leaves the form data exactly as it was prior to generation.",
+        "Applying the draft updates the visible fields across tabs accordingly."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/portfolio/FillMyDetailsDialog.tsx",
+          "operation": "modify",
+          "description": "Add a safe preview/confirmation flow within the resume import section. After draft generation, display a compact English preview (key extracted fields like name/role/email plus counts for skills categories, experience items, projects, and links). Provide explicit actions: \"Apply Draft\" (merges into formData so changes appear across existing tabs) and \"Discard\" (clears the generated draft and preserves formData exactly). Use existing shadcn-ui components (Card/AlertDialog/Button/ScrollArea/etc.) as appropriate for a compact preview layout. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/lib/resume/summarizePortfolioPatch.ts",
+          "operation": "create",
+          "description": "Create a helper that converts the generated resume patch into a compact, UI-friendly summary (e.g., which top-level sections have changes and counts of extracted items) to support the preview/confirmation step without needing to render every field."
+        }
+      ]
+    }
+  ]
+}

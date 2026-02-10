@@ -1,0 +1,91 @@
+{
+  "kind": "build_request",
+  "title": "Add resume-based auto-fill for portfolio details",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-13",
+      "text": "Add a resume import entry inside the existing \"Fill My Details\" dialog that lets the user paste resume text and apply an auto-filled draft into the current `PortfolioContent` form data.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "use this resume and fill my details and information"
+        ]
+      },
+      "acceptanceCriteria": [
+        "In the Fill My Details dialog, there is a clear UI section (e.g., a new tab or a panel) labeled in English for importing from a resume.",
+        "The user can paste resume text into a multiline text area and click an action (e.g., \"Generate Draft\") to produce auto-filled values for the portfolio form.",
+        "The user can review the generated draft and explicitly apply it to the editable form state (no silent overwrite).",
+        "If the resume text is empty, the UI shows an inline validation message and does not attempt to generate a draft.",
+        "All changes remain client-side and use the existing localStorage override mechanism when the user clicks Save."
+      ]
+    },
+    {
+      "id": "REQ-14",
+      "text": "Implement a deterministic, client-side resume-to-`PortfolioContent` parser/mapping (no external services) that extracts common resume fields (name, headline/role, summary, skills, experience, education, projects, links, email) and maps them into the existing schema in `frontend/src/content/portfolioContent.ts`.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "use this resume and fill my details and information"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Parsing and mapping runs entirely in the browser (no backend calls; no third-party/LLM integrations).",
+        "The mapping populates: `hero.name`, `hero.role`, `hero.bio`, `about.paragraphs` (or a reasonable subset), `skills.categories[*].skills`, `experience.items[*]` (work/education), `projects.projects[*]` (when identifiable), `contact.email` (when identifiable), and `footer.socialLinks` (when identifiable).",
+        "If a field cannot be confidently extracted, the existing value in the form remains unchanged (do not blank out user data).",
+        "The parser tolerates typical resume formatting (headings like SUMMARY, SKILLS, EXPERIENCE, EDUCATION, PROJECTS; bullet lists; varying whitespace) without crashing.",
+        "User-facing labels and helper text for this feature are in English."
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "text": "Add a safe preview/confirmation step for resume import that shows what will change before applying the imported values to the editable form state.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "use this resume and fill my details and information"
+        ]
+      },
+      "acceptanceCriteria": [
+        "After generating a draft from resume text, the UI presents a compact preview (e.g., key fields and counts) of the extracted data before applying it.",
+        "The user can choose to apply the draft or discard it and keep the current form values.",
+        "Discarding the draft leaves the form data exactly as it was prior to generation.",
+        "Applying the draft updates the visible fields across tabs accordingly."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not add any backend functionality; `backend/main.mo` must remain unchanged for this request.",
+    "Do not modify files under `frontend/src/components/ui` or any other immutable paths listed in SYSTEM_CONTEXT.",
+    "Do not use third-party/LLM services to interpret resumes; parsing must be deterministic and client-side only.",
+    "Preserve the existing `PortfolioContent` schema in `frontend/src/content/portfolioContent.ts` (no breaking schema changes)."
+  ],
+  "nonGoals": [
+    "Building a full resume uploader/parser for PDF/DOCX files.",
+    "Guaranteeing perfect extraction for every resume format.",
+    "Adding new portfolio sections beyond the existing schema to accommodate arbitrary resume content."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-add-a-resume-import-entry-inside-the-existing-fill-my-details-dialog-that-lets-the-user-paste-resume-text-and-apply-an-auto-filled-draft-into-the-current-portfoliocontent-form-data",
+      "featureTitle": "Add a resume import entry inside the existing \"Fill My Details\" dialog that lets the user paste resume text and apply an auto-filled draft into the current `PortfolioContent` form data.",
+      "files": [
+        "frontend/src/components/portfolio/FillMyDetailsDialog.tsx",
+        "frontend/src/lib/resume/applyPortfolioPatch.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-13"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-deterministic-client-side-resume-to-portfoliocontent-parser-mapping-no-external-services-that-extracts-common-resume-fields-name-headline-role-summary-skills-experience-education-projects-links-email-and-maps-them-into-the-existing-schema-in-frontend-src-content-portfoliocontent-ts",
+      "featureTitle": "Implement a deterministic, client-side resume-to-`PortfolioContent` parser/mapping (no external services) that extracts common resume fields (name, headline/role, summary, skills, experience, education, projects, links, email) and maps them into the existing schema in `frontend/src/content/portfolioContent.ts`.",
+      "files": [
+        "frontend/src/components/portfolio/FillMyDetailsDialog.tsx",
+        "frontend/src/lib/resume/parseResumeToPortfolioPatch.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-14"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-safe-preview-confirmation-step-for-resume-import-that-shows-what-will-change-before-applying-the-imported-values-to-the-editable-form-state",
+      "featureTitle": "Add a safe preview/confirmation step for resume import that shows what will change before applying the imported values to the editable form state.",
+      "files": [
+        "frontend/src/components/portfolio/FillMyDetailsDialog.tsx",
+        "frontend/src/lib/resume/summarizePortfolioPatch.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-15"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
